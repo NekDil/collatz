@@ -1,9 +1,9 @@
-fn collatz(num: u64, v: &mut Vec<u32>) -> u32 {
+fn collatz(num: u64, cache: &mut Vec<u32>) -> u32 {
     let mut n = num as usize;
     let mut computed = 0u32;
 
     while n != 1 {
-        match v.get(n) {
+        match cache.get(n) {
             Some(c) => {
                 computed = computed + c;
                 break;
@@ -18,8 +18,8 @@ fn collatz(num: u64, v: &mut Vec<u32>) -> u32 {
             }
         }
     }
-    v.push(computed);
-    *(v.get(num as usize).unwrap())
+    cache.push(computed);
+    *(cache.get(num as usize).unwrap())
 }
 
 fn main() {
@@ -34,8 +34,6 @@ fn main() {
             max = c;
             max_num = n;
         }
-
-        // println!("{} => {}", &n, &c);
     }
     let elapsed = now.elapsed();
 
